@@ -67,4 +67,4 @@ io.on('connection', socket => {
 });
 
 
-io.listen(4000);
+io.listen(Number(process.argv[2]) || 4000);
