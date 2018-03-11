@@ -40,6 +40,15 @@ io.on('connection', socket => {
             socket.send(`${otherID} is Offline`);
         }
     });
+    socket.on('proxy', (otherID: string) => {
+        const other = io.sockets.connected[otherID];
+        if (other) {
+            socket.send(`You are calling a proxy from ${otherID}`);
+            other.emit('proxy', socket.id);
+        } else {
+            socket.send(`${otherID} is Offline`);
+        }
+    });
     socket.on('answer', (otherID: string) => {
         const other = io.sockets.connected[otherID];
         if (other) {
